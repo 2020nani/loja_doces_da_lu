@@ -7,6 +7,7 @@ import br.com.docesdalu.application.dto.UsuarioInput;
 import br.com.docesdalu.application.mapper.UsuarioMapper;
 import br.com.docesdalu.core.usuario.Usuario;
 import br.com.docesdalu.core.usuario.UsuarioService;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
@@ -26,11 +27,13 @@ public class UsuarioController {
         this.rolesRepository = rolesRepository;
     }
 
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @GetMapping("teste")
     public String testeSecurity(){
         return "ok";
     }
 
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_USER')")
     @PostMapping("usuario")
     public Usuario salvarUsuario(@Validated @RequestBody UsuarioInput usuarioInput){
         Usuario usuario = usuarioMapper.usuarioMapperInput(usuarioInput, passwordEncoder);
