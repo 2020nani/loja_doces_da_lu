@@ -1,6 +1,6 @@
 package br.com.docesdalu.application.mapper;
 
-import br.com.docesdalu.application.dto.UsuarioInput;
+import br.com.docesdalu.application.dto.input.UsuarioInput;
 import br.com.docesdalu.core.usuario.Usuario;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Component;

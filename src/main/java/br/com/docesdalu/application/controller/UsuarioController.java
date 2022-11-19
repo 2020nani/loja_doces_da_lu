@@ -1,9 +1,9 @@
-package br.com.docesdalu.application;
+package br.com.docesdalu.application.controller;
 
 import br.com.docesdalu.application.config.security.RoleAcess;
 import br.com.docesdalu.application.config.security.Roles;
 import br.com.docesdalu.application.config.security.RolesRepository;
-import br.com.docesdalu.application.dto.UsuarioInput;
+import br.com.docesdalu.application.dto.input.UsuarioInput;
 import br.com.docesdalu.application.mapper.UsuarioMapper;
 import br.com.docesdalu.core.usuario.Usuario;
 import br.com.docesdalu.core.usuario.UsuarioService;
