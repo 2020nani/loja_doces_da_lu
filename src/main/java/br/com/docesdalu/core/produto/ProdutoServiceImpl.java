@@ -1,17 +1,19 @@
 package br.com.docesdalu.core.produto;
 
-import lombok.RequiredArgsConstructor;
-import org.springframework.data.crossstore.ChangeSetPersister;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
 import java.util.NoSuchElementException;
 
 @Service
-@RequiredArgsConstructor
 public class ProdutoServiceImpl implements ProdutoService{
 
     private ProdutoRepository produtoRepository;
+
+    public ProdutoServiceImpl(ProdutoRepository produtoRepository) {
+        this.produtoRepository = produtoRepository;
+    }
 
     @Override
     public Produto salvarProduto(Produto produto) {
@@ -24,12 +26,19 @@ public class ProdutoServiceImpl implements ProdutoService{
     }
 
     @Override
-    public List<Produto> buscarProdutos() {
-        return null;
+    public Page<Produto> buscarProdutos(Pageable paginacao) {
+        return produtoRepository.findAll(paginacao);
     }
 
     @Override
-    public void deletarProduto(Long idProduto) {
+    public Produto buscaProdutoPorId(Long idProduto) {
+        return produtoRepository.findById(idProduto)
+                .orElseThrow(() -> new NoSuchElementException("erro"));
+    }
+
+    @Override
+    public String deletarProduto(Long idProduto) {
         produtoRepository.deleteById(idProduto);
+        return "Deletado com sucesso";
     }
 }

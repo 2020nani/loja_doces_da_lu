@@ -37,7 +37,6 @@ public class UsuarioController {
     @PostMapping("usuario")
     public Usuario salvarUsuario(@Validated @RequestBody UsuarioInput usuarioInput){
         Usuario usuario = usuarioMapper.usuarioMapperInput(usuarioInput, passwordEncoder);
-        System.out.println(usuario);
         return usuarioService.salvarUsuario(usuario);
     }
 
