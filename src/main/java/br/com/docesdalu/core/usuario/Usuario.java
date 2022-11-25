@@ -1,15 +1,13 @@
 package br.com.docesdalu.core.usuario;
 
-import br.com.docesdalu.application.config.security.RoleAcess;
 import br.com.docesdalu.application.config.security.Roles;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;
-//import org.springframework.security.core.GrantedAuthority;
-//import org.springframework.security.core.userdetails.UserDetails;
-
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.GrantedAuthority;
 import javax.persistence.*;
 import javax.validation.constraints.Future;
 import java.time.LocalDate;
@@ -21,7 +19,7 @@ import java.util.List;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class Usuario /*implements UserDetails*/ {
+public class Usuario implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -42,7 +40,7 @@ public class Usuario /*implements UserDetails*/ {
     @CreationTimestamp
     private LocalDate created;
 
-    /*@Override
+    @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return this.roles;
     }
@@ -75,5 +73,5 @@ public class Usuario /*implements UserDetails*/ {
     @Override
     public boolean isEnabled() {
         return true;
-    }*/
+    }
 }
