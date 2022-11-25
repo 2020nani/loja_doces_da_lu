@@ -1,4 +1,4 @@
-package br.com.docesdalu.application.dto;
+package br.com.docesdalu.application.dto.input;
 
 import br.com.docesdalu.application.config.security.Roles;
 import lombok.AllArgsConstructor;
