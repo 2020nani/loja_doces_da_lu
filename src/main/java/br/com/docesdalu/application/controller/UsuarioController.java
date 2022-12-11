@@ -27,13 +27,11 @@ public class UsuarioController {
         this.rolesRepository = rolesRepository;
     }
 
-    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @GetMapping("teste")
     public String testeSecurity(){
         return "ok";
     }
 
-    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_USER')")
     @PostMapping("usuario")
     public Usuario salvarUsuario(@Validated @RequestBody UsuarioInput usuarioInput){
         Usuario usuario = usuarioMapper.usuarioMapperInput(usuarioInput, passwordEncoder);

@@ -1,5 +1,6 @@
-package br.com.docesdalu.core.produto;
+package br.com.docesdalu.infrastructure.repository;
 
+import br.com.docesdalu.core.produto.Produto;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
