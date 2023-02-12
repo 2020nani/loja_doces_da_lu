@@ -25,5 +25,6 @@ public class ProdutoInput {
     @NotNull
     @Positive
     private Integer quantidade;
-    private File imagem;
+
+    private String fileBase64;
 }

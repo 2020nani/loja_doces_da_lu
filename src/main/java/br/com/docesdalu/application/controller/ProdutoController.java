@@ -6,6 +6,8 @@ import br.com.docesdalu.application.dto.output.ProdutoOutput;
 import br.com.docesdalu.application.mapper.ProdutoMapper;
 import br.com.docesdalu.core.produto.Produto;
 import br.com.docesdalu.core.produto.ProdutoServiceImpl;
+import com.jcraft.jsch.JSchException;
+import com.jcraft.jsch.SftpException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
@@ -30,7 +32,7 @@ public class ProdutoController {
 
     @PostMapping("/produtos")
     @Transactional
-    private Produto salvarProduto(@Valid @RequestBody ProdutoInput produtoInput){
+    private Produto salvarProduto(@Valid @RequestBody ProdutoInput produtoInput) throws JSchException, SftpException {
         return produtoService.salvarProduto(produtoMapper.produtoMapperInput(produtoInput));
     }
 

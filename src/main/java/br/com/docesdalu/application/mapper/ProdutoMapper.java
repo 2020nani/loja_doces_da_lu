@@ -3,21 +3,29 @@ package br.com.docesdalu.application.mapper;
 import br.com.docesdalu.application.dto.input.ProdutoEdit;
 import br.com.docesdalu.application.dto.input.ProdutoInput;
 import br.com.docesdalu.core.produto.Produto;
+import br.com.docesdalu.infrastructure.config.sftp.SftpConfig;
+import com.jcraft.jsch.JSchException;
+import com.jcraft.jsch.SftpException;
 import org.springframework.stereotype.Component;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.Optional;
+
+import static br.com.docesdalu.application.utils.ConverteBase64Multipartfile.base64ToMultipartFile;
+import static br.com.docesdalu.infrastructure.config.sftp.SftpConfig.lerArquivo;
 
 @Component
 public class ProdutoMapper {
 
-    public Produto produtoMapperInput(ProdutoInput produtoInput){
+    public Produto produtoMapperInput(ProdutoInput produtoInput) throws JSchException, SftpException {
+        MultipartFile file = base64ToMultipartFile(produtoInput.getFileBase64());
 
         return Produto.builder()
                 .nome(produtoInput.getNome())
                 .categoria(produtoInput.getCategoria())
                 .preco(produtoInput.getPreco())
                 .quantidade(produtoInput.getQuantidade())
-                .pathImagem("teste")
+                .pathImagem(SftpConfig.salvarImagemSftp(lerArquivo(file), file.getOriginalFilename()))
                 .build();
     }
 

@@ -7,6 +7,8 @@ import org.springframework.stereotype.Service;
 
 import java.util.NoSuchElementException;
 
+import static br.com.docesdalu.infrastructure.config.sftp.SftpConfig.deletarImagemSftp;
+
 @Service
 public class ProdutoServiceImpl implements ProdutoService{
 
@@ -39,6 +41,9 @@ public class ProdutoServiceImpl implements ProdutoService{
 
     @Override
     public String deletarProduto(Long idProduto) {
+        Produto produto = produtoRepository.findById(idProduto)
+                .orElseThrow(() -> new NoSuchElementException("Produto nao encontrado"));
+        deletarImagemSftp(produto.getPathImagem());
         produtoRepository.deleteById(idProduto);
         return "Deletado com sucesso";
     }
